@@ -141,6 +141,14 @@ app.post('/api/hubspot-proxy', async (req, res) => {
         });
     } catch (error) {
         console.error('Error creating/updating HubSpot contact:', error);
+        // Log the full error details
+        console.error('Error details:', {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status,
+            headers: error.response?.headers
+        });
+        
         res.status(500).json({ 
             error: 'Failed to create/update contact',
             details: error.response?.data?.message || error.message
@@ -153,7 +161,25 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok' });
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err);
+    res.status(500).json({
+        error: 'Internal server error',
+        message: err.message
+    });
+});
+
+// Handle 404 errors
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'Not found',
+        message: 'The requested endpoint does not exist'
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    console.log('HubSpot API Key configured:', HUBSPOT_API_KEY ? 'Yes' : 'No');
 });
