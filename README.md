@@ -1,8 +1,10 @@
-<!-- The script tag that configures the form handler -->
+Configuration script
+
 <script id="hubspot-form-handler" 
-        data-form-id="your-form-id" 
-        data-api-url="https://your-app-name.onrender.com/api/hubspot-proxy">
+data-form-id="buurenberg-contact-form" 
+data-api-url="https://buurenberg-contact-proxy.onrender.com/api/hubspot-proxy">
 </script>
 
-<!-- The actual form handler script -->
-<script src="path/to/hetlabo.api.js"></script>
+Load the script from GitHub
+
+<script src="https://cdn.jsdelivr.net/gh/het-labo/buurenberg-contact@main/hetlabo-api.js"></script>

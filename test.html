@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="buurenberg-contact-form">
+        <div>
+            <label for="firstname">Voornaam *</label>
+            <input id="firstname" name="firstname" type="text" required>
+        </div>
+
+        <div>
+            <label for="lastname">Achternaam *</label>
+            <input id="lastname" name="lastname" type="text" required>
+        </div>
+
+        <div>
+            <label for="email">E-mailadres *</label>
+            <input id="email" name="email" type="email" required>
+        </div>
+
+        <div>
+            <label for="phone">Telefoonnummer</label>
+            <input id="phone" name="phone" type="tel">
+        </div>
+
+        <div>
+            <label>Ik heb interesse in:</label>
+            <div>
+                <div>
+                    <input id="interest-appartement" type="checkbox" name="interest[]" value="appartement">
+                    <label for="interest-appartement">Appartement</label>
+                </div>
+                <div>
+                    <input id="interest-penthouse" type="checkbox" name="interest[]" value="penthouse">
+                    <label for="interest-penthouse">Penthouse</label>
+                </div>
+                <div>
+                    <input id="interest-kangoeroewoning" type="checkbox" name="interest[]" value="kangoeroewoning">
+                    <label for="interest-kangoeroewoning">Kangoeroewoning</label>
+                </div>
+                <div>
+                    <input id="interest-assistentiewoning" type="checkbox" name="interest[]" value="assistentiewoning">
+                    <label for="interest-assistentiewoning">Assistentiewoning</label>
+                </div>
+                <div>
+                    <input id="interest-commerciele_ruimte" type="checkbox" name="interest[]" value="commerciele_ruimte">
+                    <label for="interest-commerciele_ruimte">Commerciële ruimte</label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label for="message">Jouw bericht</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+        </div>
+
+        <div>
+            <input id="newsletter" type="checkbox" name="newsletter" value="true">
+            <label for="newsletter">Ja, ik wil ook graag via de nieuwsbrief op de hoogte worden gehouden van de voortgang van Buur&Berg</label>
+        </div>
+
+        <div>
+            <input id="privacy" type="checkbox" name="privacy" required>
+            <label for="privacy">Ja, ik ga akkoord met het <a href="https://buurenberg.com/privacyverklaring">privacybeleid</a> *</label>
+        </div>
+
+        <div>
+            <button type="submit">Verzenden</button>
+        </div>
+    </form>
+
+
+    <!-- Configuration script -->
+    <script id="hubspot-form-handler" 
+        data-form-id="buurenberg-contact-form" 
+        data-api-url="https://buurenberg-contact-proxy.onrender.com/api/hubspot-proxy">
+    </script>
+
+    <!-- Load the script from GitHub -->
+    <script src="https://cdn.jsdelivr.net/gh/het-labo/buurenberg-contact@main/hetlabo-api.js"></script>
+</body>
+</html>
