@@ -148,12 +148,21 @@ app.post('/api/hubspot-proxy', async (req, res) => {
             message: error.message,
             response: error.response?.data,
             status: error.response?.status,
-            headers: error.response?.headers
+            headers: error.response?.headers,
+            request: {
+                url: error.config?.url,
+                method: error.config?.method,
+                headers: error.config?.headers,
+                data: error.config?.data
+            }
         });
         
+        // Send more detailed error response
         res.status(500).json({ 
             error: 'Failed to create/update contact',
-            details: error.response?.data?.message || error.message
+            details: error.response?.data?.message || error.message,
+            hubspotError: error.response?.data,
+            status: error.response?.status
         });
     }
 });

@@ -7,4 +7,12 @@ data-api-url="https://buurenberg-contact-proxy.onrender.com/api/hubspot-proxy">
 
 Load the script from GitHub
 
+<script src="https://raw.githubusercontent.com/het-labo/buurenberg-contact/main/hetlabo-api.js"></script>
+
+or
+
 <script src="https://cdn.jsdelivr.net/gh/het-labo/buurenberg-contact@main/hetlabo-api.js"></script>
+
+or
+
+<script src="https://cdn.jsdelivr.net/gh/het-labo/buurenberg-contact@main/hetlabo-api.js?v=1"></script>
