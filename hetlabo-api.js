@@ -61,14 +61,14 @@
                 const result = await response.json();
                 
                 if (response.ok) {
-                    alert('Bedankt voor uw interesse!');
+                    console.log('Victory!');
                     form.reset();
                 } else {
                     throw new Error(result.error || result.details || 'Er is iets misgegaan');
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                alert('Er is een fout opgetreden: ' + error.message);
+                console.log('Er is een fout opgetreden: ' + error.message);
             } finally {
                 // Reset button state
                 submitButton.disabled = false;
