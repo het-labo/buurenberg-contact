@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+    <form id="form-contact">
+        <div>
+            <label for="firstname">Voornaam *</label>
+            <input id="firstname" name="firstname" type="text" required>
+        </div>
+
+        <div>
+            <label for="lastname">Achternaam *</label>
+            <input id="lastname" name="lastname" type="text" required>
+        </div>
+
+        <div>
+            <label for="email">E-mailadres *</label>
+            <input id="email" name="email" type="email" required>
+        </div>
+
+        <div>
+            <label for="phone">Telefoonnummer</label>
+            <input id="phone" name="phone" type="tel">
+        </div>
+
+        <div>
+            <label>Ik heb interesse in:</label>
+            <div>
+                <div>
+                    <input id="interest-appartement" type="checkbox" name="interest[]" value="appartement">
+                    <label for="interest-appartement">Appartement</label>
+                </div>
+                <div>
+                    <input id="interest-penthouse" type="checkbox" name="interest[]" value="penthouse">
+                    <label for="interest-penthouse">Penthouse</label>
+                </div>
+                <div>
+                    <input id="interest-kangoeroewoning" type="checkbox" name="interest[]" value="kangoeroewoning">
+                    <label for="interest-kangoeroewoning">Kangoeroewoning</label>
+                </div>
+                <div>
+                    <input id="interest-assistentiewoning" type="checkbox" name="interest[]" value="assistentiewoning">
+                    <label for="interest-assistentiewoning">Assistentiewoning</label>
+                </div>
+                <div>
+                    <input id="interest-commerciele_ruimte" type="checkbox" name="interest[]" value="commerciele_ruimte">
+                    <label for="interest-commerciele_ruimte">Commerciële ruimte</label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label for="message">Jouw bericht</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+        </div>
+
+        <div>
+            <input id="newsletter" type="checkbox" name="newsletter" value="true">
+            <label for="newsletter">Ja, ik wil ook graag via de nieuwsbrief op de hoogte worden gehouden van de voortgang van Buur&Berg</label>
+        </div>
+
+        <div>
+            <input id="privacy" type="checkbox" name="privacy" required>
+            <label for="privacy">Ja, ik ga akkoord met het <a href="https://buurenberg.com/privacyverklaring">privacybeleid</a> *</label>
+        </div>
+
+        <div>
+            <button type="submit">Verzenden</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('form-contact').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Convert FormData to object
+            const data = {
+                firstname: formData.get('firstname'),
+                lastname: formData.get('lastname'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                interest: formData.getAll('interest[]'),
+                message: formData.get('message'),
+                newsletter: formData.get('newsletter') === 'true' ? true : false,
+                privacy: formData.get('privacy') === 'true'
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('Bedankt voor uw interesse!');
+                    form.reset();
+                } else {
+                    throw new Error(result.error || 'Er is iets misgegaan');
+                }
+            } catch (error) {
+                alert('Er is een fout opgetreden: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
